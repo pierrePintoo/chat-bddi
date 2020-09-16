@@ -5,8 +5,6 @@ import router from './router' //check direct le index.js
 
 const socket = io('https://bddi-2019-chat.herokuapp.com/')
 
-
-
 const store = new Vue({
     data: {
         isRegistered: false,
