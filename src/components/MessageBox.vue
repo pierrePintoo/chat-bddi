@@ -1,29 +1,37 @@
 <template>
         <form @submit.prevent="onSubmit" class="message-box__form">
-            <input class="message-box__input" v-model="message" type="text">
+            <input ref="input" class="message-box__input" v-model="message" type="text">
+            <!-- <Emoji @click="selectedEmoji"/> -->
             <button class="message-box__btn">Send</button>
         </form>
 </template>
 
 <script>
+require('vue-chat-emoji/dist/vue-chat-emoji.css')
+
 export default {
-    data(){
-        return {
-            message: ''
-        }
-    },
-    methods: {
-        onSubmit(){
-            this.$emit('sendMessage', this.message)
-            this.message = ''
-        }
+  data () {
+    return {
+      message: ''
     }
+  },
+  methods: {
+    onSubmit () {
+      this.$emit('sendMessage', this.message)
+      this.message = ''
+    },
+    selectedEmoji (args) {
+      console.log(args)
+      this.$refs.input.value = args.emoji
+    }
+  }
 }
 </script>
 
 <style>
 .message-box__input{
     width: 70%;
+    height: 80%;
     font-size: 1.2em;
     background: none;
     border: none;
@@ -41,6 +49,7 @@ export default {
 
 .message-box__btn{
     width: 20%;
+    height: 80%;
     border: none;
     background-color: black;
     color: white;

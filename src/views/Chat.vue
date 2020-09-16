@@ -15,34 +15,34 @@ import UsersList from '../components/UsersList.vue'
 import Header from '../components/Header.vue'
 import store from '../store'
 export default {
-    data (){
-        return {
-            store
-        }
-    },
-    methods:{
-        onSendMessage(text){
-            store.messageNew(text)
-        }
-    },
-    components:{
-        MessageBox,
-        MessagesList,
-        UsersList,
-        Header
+  data () {
+    return {
+      store
     }
+  },
+  methods: {
+    onSendMessage (text) {
+      store.messageNew(text)
+    }
+  },
+  components: {
+    MessageBox,
+    MessagesList,
+    UsersList,
+    Header
+  }
 }
 </script>
 
 <style>
 .chat-page{
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     display: grid;
-    grid-template-rows: 100px 83vh 50px ;
+    grid-template-rows: 70px 6fr 60px ;
     grid-template-columns: 1fr 2fr;
     grid-gap: 20px;
-    grid-template-areas: 
+    grid-template-areas:
     "header header"
     "users-list messages-list"
     "users-list message-box";

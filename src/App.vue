@@ -4,24 +4,33 @@
   </div>
 </template>
 
-<style lang="scss">
+<style>
 @font-face {
- font-family: "CarmenSansLight";
- src: url("/assets/fonts/CarmenSansLight.otf") format("otf"),
+    font-family: "Carmen";
+    src: local("Carmen"),
+    url("./fonts/CarmenSansLight.woff") format("woff");
 }
 
 body{
-  font-family: "CarmenSansLight";
-  width: 100%;
-  height: 100%;
+  font-family: "Carmen", Arial, Helvetica;
+  width: 100vw;
+  height: 100vh;
   margin: 0;
   padding: 0;
   background-color: rgb(255, 217, 0);
   font-size: 1.2em;
 }
 
+button, input{
+  font-family: "Carmen", Arial, Helvetica;
+}
+
 li{
   list-style: none;
+}
+
+ul{
+  padding: 0;
 }
 
 textarea:focus, input:focus{
