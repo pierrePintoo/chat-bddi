@@ -5,24 +5,26 @@
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@font-face {
+ font-family: "CarmenSansLight";
+ src: url("/assets/fonts/CarmenSansLight.otf") format("otf"),
 }
 
-#nav {
-  padding: 30px;
+body{
+  font-family: "CarmenSansLight";
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(255, 217, 0);
+  font-size: 1.2em;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+li{
+  list-style: none;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+textarea:focus, input:focus{
+    outline: none;
 }
 </style>

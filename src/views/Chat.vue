@@ -1,8 +1,10 @@
 <template>
-    <div>
-        <MessageBox @sendMessage="onSendMessage"/>
-        <MessagesList :messages="messages"/>
-        <UsersList :users="users"/>
+    <div class="chat-page">
+        <Header class="header"/>
+        <UsersList class="users-list" :users="store.users"/>
+        <MessagesList class="messages-list" :messages="store.messages"/>
+        <MessageBox class="message-box" @sendMessage="onSendMessage"/>
+
     </div>
 </template>
 
@@ -10,32 +12,65 @@
 import MessageBox from '../components/MessageBox.vue'
 import MessagesList from '../components/MessagesList.vue'
 import UsersList from '../components/UsersList.vue'
-
+import Header from '../components/Header.vue'
+import store from '../store'
 export default {
     data (){
         return {
-            users: [
-                { name : 'Pierre'},
-                { name : 'Paul'},
-                { name : 'Jacques'},
-            ],
-            messages: [
-                {user : { name: 'Pierre'}, text: 'Wesh les potos'},
-                {user : { name: 'Paul'}, text: 'Yo, ça va ?'}
-            ]
+            store
         }
     },
     methods:{
         onSendMessage(text){
-            this.messages.push({
-                user: {name: 'Pierre'}, text
-            })
+            store.messageNew(text)
         }
     },
     components:{
         MessageBox,
         MessagesList,
-        UsersList
+        UsersList,
+        Header
     }
 }
 </script>
+
+<style>
+.chat-page{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 100px 83vh 50px ;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 20px;
+    grid-template-areas: 
+    "header header"
+    "users-list messages-list"
+    "users-list message-box";
+}
+.header{
+    grid-area: header;
+    width: 100%;
+    height: 100%;
+}
+
+.users-list{
+    grid-area: users-list;
+    width: 100%;
+    height: 100%;
+}
+
+.messages-list{
+    grid-area: messages-list;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+
+}
+
+.message-box{
+    grid-area: message-box;
+    width: 100%;
+    height: 100%;
+}
+
+</style>

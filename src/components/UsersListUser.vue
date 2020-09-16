@@ -1,5 +1,5 @@
 <template>
-    <li>{{ user.name }}</li>
+    <li>{{ user.username }}</li>
 </template>
 
 <script>
@@ -9,6 +9,6 @@ export default {
                 type: Object,
                 require: true
             }
-            }
+        }
 }
 </script>
