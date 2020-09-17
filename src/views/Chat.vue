@@ -39,11 +39,10 @@ export default {
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-rows: 70px 6fr 60px ;
+    grid-template-rows: 70px 5fr 100px ;
     grid-template-columns: 1fr 2fr;
-    grid-gap: 20px;
     grid-template-areas:
-    "header header"
+    "header messages-list"
     "users-list messages-list"
     "users-list message-box";
 }
@@ -65,12 +64,23 @@ export default {
     width: 100%;
     height: 100%;
     overflow: scroll;
+    background-color: #181818;
+    color: white;
+    font-size: 15px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    line-height: 20px;
+    display: flex;
+    flex-direction: column;
+    letter-spacing: 1px;
 }
 
 .message-box{
     grid-area: message-box;
     width: 100%;
     height: 100%;
+    background-color: #181818;
+    color: white;
 }
 
 </style>

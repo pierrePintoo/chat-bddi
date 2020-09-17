@@ -5,6 +5,7 @@ import router from './router' //check direct le index.js
 
 const socket = io('https://bddi-2019-chat.herokuapp.com/')
 
+const COLORS = ['green', 'red', 'blue']
 const store = new Vue({
     data: {
         isRegistered: false,
@@ -13,9 +14,17 @@ const store = new Vue({
         users: [],
         messages: [],
         listeMessages: null,
-        firstTime: true
+        firstTime: true,
+        avatars: {
+            
+        }
     },
+
     methods: {
+        generateRandomColor () {
+            return COLORS['']
+        },
+
         registerListerners(){
             socket.on('connect', () => {
                 console.log('Bien connecté')
@@ -27,7 +36,20 @@ const store = new Vue({
                 }
             })
             
-            socket.on('users update', ({users}) => {
+            socket.on('users update', ({users, user, type}) => {
+                this.users = users
+                if(this.users.length > 0){
+                    if(type === 'join'){
+                        //attribuer un avatar random
+                        this.avatars[user.username] = this.generateRandomColor()
+                    } else {
+                        delete this.avatars[user.username]
+                    }
+                } else {
+                    this.users.forEach( user => {
+                        this.avatars[user.username] = this.generateRandomColor()
+                    });
+                }
                 this.users = users
             })
             
@@ -57,8 +79,10 @@ const store = new Vue({
 
             socket.connect
         },
+
         userRegister(username) {
-            socket.emit('user register', { username })
+            const avatar = 'https://giphy.com/gifs/l1Zy8CNkQTc8V8LpPH/html5' 
+            socket.emit('user register', { username, avatar })
         },
         userTyping () {
 
@@ -83,6 +107,7 @@ const store = new Vue({
     },
     created () {
         this.registerListerners()
+        console.log(this.avatars)
     }
 })
 

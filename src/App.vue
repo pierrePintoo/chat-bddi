@@ -8,6 +8,12 @@
 @font-face {
     font-family: "Carmen";
     src: local("Carmen"),
+    url("./fonts/CarmenSansThin.woff") format("woff");
+}
+
+@font-face {
+    font-family: "CarmenRegular";
+    src: local("CarmenSemiBold"),
     url("./fonts/CarmenSansLight.woff") format("woff");
 }
 
@@ -31,6 +37,7 @@ li{
 
 ul{
   padding: 0;
+  margin: 0;
 }
 
 textarea:focus, input:focus{

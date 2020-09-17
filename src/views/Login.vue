@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="login">
         <PreLoader class="login_preloader end"/>
         <div class="error" v-if="error">
             {{ error.message }}
@@ -23,32 +23,81 @@ export default {
       username: '',
       error: store.error,
       showForm: false,
-      usernameChat: ''
+      usernameChat: '',
     }
   },
   methods: {
+    isLastIndexOF (arrayLength, el) {
+      if(arrayLength - 1 == this.usernameChat.indexOf(el)) {
+        return true
+      } else {
+        return false
+      }
+    },
+    /*transformText (text) {
+      let textAarray = text.split('')
+      let lengthArrayText = this.textAarray.length
+      for (let i = 0; i < text.length; i++) {
+        if(this.isLastIndexOF(lengthArrayText, textAarray[i]) == false) {
+          switch(textAarray[i]) {
+            case 's':
+            case 'j':
+            case 'ss':
+              textAarray[i] = 'ch'
+              break;
+            case 'm':
+              textAarray[i] = 'mi'
+              break;
+            case 'S':
+            case 'J':
+            case 'SS':
+              textAarray[i] = 'Ch'
+              break;
+            case 'r':
+              textAarray[i] = 'rrrr'          
+              break;
+            case 'R':
+              textAarray[i] = 'RRRR'
+              break;  
+          }
+        }
+      }
+    },*/
     onSubmit () {
-      console.log('Avant transform' + this.username)
+      console.log('Avant transform : ' + this.username)
       this.usernameChat = this.username.split('')
+      let lenghtArrayUsernameChat = this.usernameChat.length;
       for (let i = 0; i < this.usernameChat.length; i++) {
-        if (this.usernameChat[i] === 's' ||
-        this.usernameChat[i] === 'j' ||
-        this.usernameChat[i] === 'ss') {
-          this.usernameChat[i] = 'ch'
-        } else if (this.usernameChat[i] === 'm') {
-          this.usernameChat[i] = 'mi'
-        } else if (this.usernameChat[i] === 'S' ||
-        this.usernameChat[i] === 'J' ||
-        this.usernameChat[i] === 'SS') {
-          this.usernameChat[i] = 'Ch'
-        } else if (this.usernameChat[i] === 'M') {
-          this.usernameChat[i] = 'Mi'
+        console.log(this.usernameChat[i] + ' : ' + this.isLastIndexOF(lenghtArrayUsernameChat, this.usernameChat[i]))
+        if(this.isLastIndexOF(lenghtArrayUsernameChat, this.usernameChat[i]) == false) {
+          switch(this.usernameChat[i]) {
+            case 's':
+            case 'j':
+            case 'ss':
+              this.usernameChat[i] = 'ch'
+              break;
+            case 'm':
+              this.usernameChat[i] = 'mi'
+              break;
+            case 'S':
+            case 'J':
+            case 'SS':
+              this.usernameChat[i] = 'Ch'
+              break;
+            case 'r':
+              this.usernameChat[i] = 'rrrr'          
+              break;
+            case 'R':
+              this.usernameChat[i] = 'RRRR'
+              break;  
+          }
         }
       }
       store.userRegister(this.username)
       this.username = ''
-      console.log(this.usernameChat.join(''))
+      //console.log(this.usernameChat.join(''))
       this.username = this.usernameChat.join('')
+      //this.transformText(this.username)
     },
     showFormToggle () {
       setTimeout(() => {
@@ -65,7 +114,7 @@ export default {
 }
 </script>
 <style>
-div{
+.login{
   width: 100%;
   height: 100vh;
   display: flex;
