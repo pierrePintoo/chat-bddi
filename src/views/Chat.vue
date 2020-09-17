@@ -47,6 +47,7 @@ export default {
     "users-list messages-list"
     "users-list message-box";
 }
+
 .header{
     grid-area: header;
     width: 100%;
@@ -64,7 +65,6 @@ export default {
     width: 100%;
     height: 100%;
     overflow: scroll;
-
 }
 
 .message-box{

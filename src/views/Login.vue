@@ -22,14 +22,33 @@ export default {
     return {
       username: '',
       error: store.error,
-      showForm: false
+      showForm: false,
+      usernameChat: ''
     }
   },
   methods: {
     onSubmit () {
+      console.log('Avant transform' + this.username)
+      this.usernameChat = this.username.split('')
+      for (let i = 0; i < this.usernameChat.length; i++) {
+        if (this.usernameChat[i] === 's' ||
+        this.usernameChat[i] === 'j' ||
+        this.usernameChat[i] === 'ss') {
+          this.usernameChat[i] = 'ch'
+        } else if (this.usernameChat[i] === 'm') {
+          this.usernameChat[i] = 'mi'
+        } else if (this.usernameChat[i] === 'S' ||
+        this.usernameChat[i] === 'J' ||
+        this.usernameChat[i] === 'SS') {
+          this.usernameChat[i] = 'Ch'
+        } else if (this.usernameChat[i] === 'M') {
+          this.usernameChat[i] = 'Mi'
+        }
+      }
       store.userRegister(this.username)
       this.username = ''
-      console.log(store.isRegistered)
+      console.log(this.usernameChat.join(''))
+      this.username = this.usernameChat.join('')
     },
     showFormToggle () {
       setTimeout(() => {
