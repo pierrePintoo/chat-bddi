@@ -1,10 +1,8 @@
 <template>
     <div class="chat-page">
-        <Header class="header"/>
         <UsersList class="users-list" :users="store.users"/>
-        <MessagesList class="messages-list" :messages="store.messages"/>
-        <MessageBox class="message-box" @sendMessage="onSendMessage"/>
-
+        <MessagesList class="messages-list" :name="this.name" :messages="store.messages"/>
+        <MessageBox @typing="onTyping" class="message-box" @sendMessage="onSendMessage"/>
     </div>
 </template>
 
@@ -12,24 +10,27 @@
 import MessageBox from '../components/MessageBox.vue'
 import MessagesList from '../components/MessagesList.vue'
 import UsersList from '../components/UsersList.vue'
-import Header from '../components/Header.vue'
 import store from '../store'
 export default {
   data () {
     return {
-      store
+      store,
+      messages: {},
+      name: ''
     }
   },
   methods: {
     onSendMessage (text) {
       store.messageNew(text)
+    },
+    onTyping (data) {
+      this.store.userTyping(data)
     }
   },
   components: {
     MessageBox,
     MessagesList,
-    UsersList,
-    Header
+    UsersList
   }
 }
 </script>
@@ -40,9 +41,9 @@ export default {
     height: 100vh;
     display: grid;
     grid-template-rows: 70px 5fr 100px ;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
-    "header messages-list"
+    "users-list messages-list"
     "users-list messages-list"
     "users-list message-box";
 }
@@ -81,6 +82,15 @@ export default {
     height: 100%;
     background-color: #181818;
     color: white;
+}
+
+.messages-list > li:nth-child(odd) > div{
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.messages-list > li:nth-child(odd) > .liste-message__message .bulle {
+  margin-right: 4%;
 }
 
 </style>

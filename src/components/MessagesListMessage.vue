@@ -1,25 +1,19 @@
 <template class="liste-messages">
     <li v-if="isCurretUser">
-      <div class="liste-message__message--current">
-        <div class="liste-message__message__bulle">
-          <strong class="username username--current" v-if="isCurretUser">{{ message.user.username }} :</strong>
-          <em class="username username--current" v-else>{{ message.user.username }} :</em>
-          <br>
-          <div class="bulle bulle--current-user">
-            <span class="bulle__text"> {{ message.text }}</span>
+      <div class="liste-message__message">
+          <img class="list_message__message__avatar avatar-current" src="../assets/avatar-cat.svg">
+          <div class="bulle bulle--current">
+            <strong class="username username--current">{{ message.user.username }} :</strong>
+            <span ref="messageRecu" class="bulle__text bulle__text--current"> {{ message.text }}</span>
           </div>
-        </div>  
-          <img class="list_message__message__avatar" src="../assets/chat-avatar.svg">  
-      </div>      
+      </div>
     </li>
     <li v-else>
       <div class="liste-message__message">
-          <img class="list_message__message__avatar" src="../assets/chat-avatar.svg">
-          <strong class="username" v-if="isCurretUser">{{ message.user.username }} :</strong>
-          <em class="username" v-else>{{ message.user.username }} :</em>
-          <br>
-          <div class="bulle bulle--others">  
-            <span class="bulle__text"> {{ message.text }}</span>
+          <img class="list_message__message__avatar" src="../assets/avatar-cat.svg">
+          <div class="bulle bulle--others">
+            <strong class="username">{{ name }}<span class="alias"> alias {{ message.user.username }} :</span></strong>
+            <span ref="messageRecu" class="bulle__text"> {{ message.text }}</span>
           </div>
       </div>
     </li>
@@ -29,9 +23,18 @@
 // import MessagesList from './MessagesList'
 import store from '../store'
 export default {
+  data () {
+    return {
+      names: ['Pitchoune', 'Choupette', 'Mimine', 'Chatoune', 'Minouche'],
+      name: ''
+    }
+  },
   computed: {
     isCurretUser () {
       return this.message.user.username === store.$data.user.username
+    },
+    color () {
+      return store.colors[this.message.user.username]
     }
   },
   props: {
@@ -40,40 +43,96 @@ export default {
       require: true
     }
   },
+  methods: {
+    getRandomNames () {
+      this.name = this.names[Math.floor(Math.random() * Math.floor(this.names.length))]
+    },
+    isLastIndexOF (arrayLength, el) {
+      if (arrayLength - 1 === this.textArray.indexOf(el)) {
+        return true
+      } else {
+        return false
+      }
+    },
+    transform () {
+      console.log('msg reçu' + this.message.text)
+      this.textArray = this.message.text.split('')
+      const lengthTextArray = this.textArray.length
+      for (let i = 0; i < this.textArray.length; i++) {
+        console.log(this.textArray[i] + ' : ' + this.isLastIndexOF(lengthTextArray, this.textArray[i]))
+        if (this.isLastIndexOF(lengthTextArray, this.textArray[i]) === false) {
+          switch (this.textArray[i]) {
+            case 's':
+            case 'j':
+            case 'ss':
+            case 'ç':
+            case 'c\'':
+              this.textArray[i] = 'ch'
+              break
+            case 'm':
+              this.textArray[i] = 'mi'
+              break
+            case 'S':
+            case 'J':
+            case 'SS':
+              this.textArray[i] = 'Ch'
+              break
+            case 'r':
+              this.textArray[i] = 'rrrr'
+              break
+            case 'R':
+              this.textArray[i] = 'RRRR'
+              break
+          }
+        }
+      }
+      this.message.text = this.textArray.join('')
+    }
+  },
+  created () {
+    // this.tranform()
+    this.getRandomNames()
+  },
+  mounted () {
+    this.transform()
+  }
 }
 </script>
 
 <style scoped>
-  .liste-message__message__bulle{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+  .avatar-current{
+    background-color: yellow
   }
 
+  .alias{
+    color: white;
+    font-family: "Carmen";
+    opacity: .6;
+  }
   .liste-message__message{
-    margin: 13px 0 0 40px;
-    display: grid;
-    grid-template-columns: 10% 40%;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 20px;
+    display: flex;
   }
 
-  .liste-message__message--current{
-    margin: 13px 40px 0 0;
-    display: grid;
-    grid-template-columns: 40% 10%;
+  .liste-message__message:nth(2n){
+    flex-direction: row-reverse;
   }
 
-  .bulle--current-user{
-    align-self: flex-end;
-  }
-
-  .bulle--current-user{
-    text-align: right;
+  .list_message__message__avatar{
+    background-size: 2em;
+    background-color: rgb(255, 217, 0);
+    border-radius: 50%;
+    max-height: 45px;
   }
 
   .bulle{
-    position: relative;
-    width: 50%;
-    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 60%;
+    margin-left: 4%;
   }
 
   /*.bulle::after{
@@ -96,11 +155,13 @@ export default {
     font-size: 14px;
     color: rgb(255, 217, 0);
     font-style: initial;
-    font-family: "CarmenSemiBold", Arial, Helvetica;
+    font-family: "CarmenSemiBold";
   }
 
   .bulle__text{
     font-size: 15px;
     word-break: break-all;
+    text-justify: left;
   }
+
 </style>

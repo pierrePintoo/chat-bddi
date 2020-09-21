@@ -1,0 +1,25 @@
+<svg id="Picto_patte_de_chat" data-name="Picto patte de chat" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28.952" height="30" viewBox="0 0 28.952 30">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Clip_6" data-name="Clip 6" d="M0,0H9.993V9.907H0Z" transform="translate(0 0.043)" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <path id="Clip_9" data-name="Clip 9" d="M0,0H9.865V8.862H0Z" transform="translate(0.087 0.079)" fill="none"/>
+    </clipPath>
+  </defs>
+  <path id="Fill_1" data-name="Fill 1" d="M2.316,1.82C3.075,1.127.228,3.7.039,4.89S.323,8.455,2.221,8.851a4.545,4.545,0,0,0,4.46-1.188C8.01,6.475,9.243,4.2,8.959,3.009S8.29.367,6.4.038c-2.277-.4-4.84,2.476-4.08,1.783" transform="matrix(0.995, 0.105, -0.105, 0.995, 19.495, 6.554)" fill="#f6c44d"/>
+  <path id="Fill_3" data-name="Fill 3" d="M.683,3.751s-1.536,2.913,0,4.821,3.174,1.607,4.71.8S7.646,6.563,8.26,4.856,9.694,1.24,7.953.436a4.738,4.738,0,0,0-4.813.5A10.352,10.352,0,0,0,.683,3.751" transform="translate(12)" fill="#f6c44d"/>
+  <g id="Group_7" data-name="Group 7" transform="translate(0 2)">
+    <path id="Clip_6-2" data-name="Clip 6" d="M0,0H9.993V9.907H0Z" transform="translate(0 0.043)" fill="none"/>
+    <g id="Group_7-2" data-name="Group 7" clip-path="url(#clip-path)">
+      <path id="Fill_5" data-name="Fill 5" d="M.913,9.124a5.154,5.154,0,0,0,4.9.309C7.513,8.711,7.3,8.372,8.5,6.414s1.813-3.785,1.013-5.022A2.732,2.732,0,0,0,6.113.155C4.513.567.913,2.423.213,5,.213,5-.587,8.2.913,9.124Z" transform="translate(0 0.043)" fill="#f6c44d"/>
+    </g>
+  </g>
+  <g id="Group_10" data-name="Group 10" transform="translate(19 17)">
+    <path id="Clip_9-2" data-name="Clip 9" d="M0,0H9.865V8.862H0Z" transform="translate(0.087 0.079)" fill="none"/>
+    <g id="Group_10-2" data-name="Group 10" clip-path="url(#clip-path-2)">
+      <path id="Fill_8" data-name="Fill 8" d="M1.107,6.56c1.584,1.421,2.178,1.8,3.96,1.421S9.055,4.731,9.451,3.689a2.949,2.949,0,0,0,0-2.747,2.5,2.5,0,0,0-3.1-.708C4.588.856,2.394.427,1.107,1.469c-.7.564-.666.663-.864,1.611S-.477,5.139,1.107,6.56Z" transform="translate(-0.005 0.821)" fill="#f6c44d"/>
+    </g>
+  </g>
+  <path id="Fill_11" data-name="Fill 11" d="M14.4,1.364c1.357.819,2.436,2.822,1.948,4.333a10.618,10.618,0,0,0-.1,4.938c.292.6,1.267,3.124.39,4.837s-1.072,2.318-4.871,2.519-7.6-3.326-7.6-3.326C-3.135,7.914.86,3.178,3.393,2.775S7.679,2.069,9.335.759s2.728-.806,5.066.6" transform="translate(0 12)" fill="#f6c44d"/>
+</svg>

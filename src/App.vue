@@ -3,7 +3,6 @@
     <router-view/>
   </div>
 </template>
-
 <style>
 @font-face {
     font-family: "Carmen";
@@ -13,8 +12,14 @@
 
 @font-face {
     font-family: "CarmenRegular";
-    src: local("CarmenSemiBold"),
+    src: local("CarmenRegular"),
     url("./fonts/CarmenSansLight.woff") format("woff");
+}
+
+@font-face {
+    font-family: "CarmenSemiBold";
+    src: local("CarmenSemiBold"),
+    url("./fonts/CarmenSansSemiBold.woff") format("woff");
 }
 
 body{
@@ -24,7 +29,16 @@ body{
   margin: 0;
   padding: 0;
   background-color: rgb(255, 217, 0);
-  font-size: 1.2em;
+  font-size: 15px;
+  overflow: hidden;
+}
+
+strong{
+  font-weight: normal;
+}
+
+#app{
+  height: 100%;
 }
 
 button, input{

@@ -1,40 +1,44 @@
-<template>
+<template style="height: 100%">
     <div class="login">
-        <PreLoader class="login_preloader end"/>
         <div class="error" v-if="error">
             {{ error.message }}
         </div>
         <transition name="fade">
           <form class="form-login" v-if="showForm" @submit.prevent="onSubmit">
+              <img src="../assets/new-logo.svg" alt="logo-chat">
               <label class="form-login__label">Chalut, che ici que tu rentreras ton nom de chat</label>
               <input class="form-login__input" v-model="username">
-              <button class="form-login__btn">Login</button>
+              <button class="form-login__btn">Connechion</button>
           </form>
         </transition>
+        <LottieAnimation class="login-animation"/>
     </div>
 </template>
 
 <script>
 import store from '../store.js'
-import PreLoader from '../components/Preloader.vue'
+import LottieAnimation from '../components/LottieAnimation.vue'
 export default {
   data () {
     return {
       username: '',
       error: store.error,
       showForm: false,
-      usernameChat: '',
+      usernameChat: ''
     }
+  },
+  components: {
+    LottieAnimation
   },
   methods: {
     isLastIndexOF (arrayLength, el) {
-      if(arrayLength - 1 == this.usernameChat.indexOf(el)) {
+      if (arrayLength - 1 === this.usernameChat.indexOf(el)) {
         return true
       } else {
         return false
       }
     },
-    /*transformText (text) {
+    /* transformText (text) {
       let textAarray = text.split('')
       let lengthArrayText = this.textAarray.length
       for (let i = 0; i < text.length; i++) {
@@ -54,62 +58,59 @@ export default {
               textAarray[i] = 'Ch'
               break;
             case 'r':
-              textAarray[i] = 'rrrr'          
+              textAarray[i] = 'rrrr'
               break;
             case 'R':
               textAarray[i] = 'RRRR'
-              break;  
+              break;
           }
         }
       }
-    },*/
+    }, */
     onSubmit () {
       console.log('Avant transform : ' + this.username)
       this.usernameChat = this.username.split('')
-      let lenghtArrayUsernameChat = this.usernameChat.length;
+      const lenghtArrayUsernameChat = this.usernameChat.length
       for (let i = 0; i < this.usernameChat.length; i++) {
         console.log(this.usernameChat[i] + ' : ' + this.isLastIndexOF(lenghtArrayUsernameChat, this.usernameChat[i]))
-        if(this.isLastIndexOF(lenghtArrayUsernameChat, this.usernameChat[i]) == false) {
-          switch(this.usernameChat[i]) {
+        if (this.isLastIndexOF(lenghtArrayUsernameChat, this.usernameChat[i]) === false) {
+          switch (this.usernameChat[i]) {
             case 's':
             case 'j':
             case 'ss':
               this.usernameChat[i] = 'ch'
-              break;
+              break
             case 'm':
               this.usernameChat[i] = 'mi'
-              break;
+              break
             case 'S':
             case 'J':
             case 'SS':
               this.usernameChat[i] = 'Ch'
-              break;
+              break
             case 'r':
-              this.usernameChat[i] = 'rrrr'          
-              break;
+              this.usernameChat[i] = 'rrrr'
+              break
             case 'R':
               this.usernameChat[i] = 'RRRR'
-              break;  
+              break
           }
         }
       }
       store.userRegister(this.username)
       this.username = ''
-      //console.log(this.usernameChat.join(''))
+      // console.log(this.usernameChat.join(''))
       this.username = this.usernameChat.join('')
-      //this.transformText(this.username)
+      // this.transformText(this.username)
     },
     showFormToggle () {
       setTimeout(() => {
         this.showForm = true
-      }, 4000)
+      }, 500)
     }
   },
   mounted () {
     this.showFormToggle()
-  },
-  components: {
-    PreLoader
   }
 }
 </script>
@@ -118,46 +119,56 @@ export default {
   width: 100%;
   height: 100vh;
   display: flex;
-  position: relative;
+  flex-direction: column;
+  padding: 100px;
 }
 
 .form-login{
-  margin: auto;
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 2fr 1fr;
-  grid-template-areas:
-  "label label"
-  "input button";
-  grid-gap: 30px;
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+  width: 23%;
+  justify-content: space-between;
 }
 
 .form-login__label{
   grid-area: label;
 }
 
+.login-animation{
+  position: absolute;
+  right: -80px;
+  bottom: -10px;
+  }
+
 .form-login__input{
   grid-area: input;
-  height: 80px;
-  font-size: 2em;
-  background: none;
+  color: #141414;
+  height: 58px;
+  font-size: 15px;
   border:none;
-  border-bottom: solid 3px black;
+  background: rgba(233, 184, 67, 0.3);
   transition: all .2s ease-in-out;
-}
-
-.form-login__input:focus{
-    outline: none;
-    border-bottom: solid 8px black;
+  border-radius: 18px;
+  padding-left: 15px;
 }
 
 .form-login__btn{
-  font-size: 2em;
+  font-size: 14px;
   grid-area: button;
-  background: black;
+  background: #141414;
   color: rgb(255, 217, 0);
-  border-radius: 15px;
+  border-radius: 50px;
   border: none;
+  height: 45px;
+  width: 50%;
+  align-self: center;
+  transition: all .5s ease;
+}
+
+.form-login__btn:hover{
+  width: 60%;
+  cursor: pointer;
 }
 
 .login_preloader{

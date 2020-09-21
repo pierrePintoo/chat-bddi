@@ -5,14 +5,17 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "surge dist chaaaat-room.surge.sh"
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "lottie-vuejs": "^0.3.6",
     "socket.io-client": "^2.3.0",
     "vue": "^2.6.11",
     "vue-chat-emoji": "^1.1.21",
     "vue-chat-scroll": "^1.4.0",
+    "vue-lottie": "^0.2.1",
     "vue-router": "^3.2.0"
   },
   "devDependencies": {

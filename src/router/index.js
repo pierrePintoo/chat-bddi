@@ -12,26 +12,32 @@ const routes = [
     name: 'Chat',
     component: Chat,
     meta: {
-      requiresAuth : true 
+      requiresAuth: true
     }
   },
   {
     path: '/login',
     name: 'Login',
     component: Login
-    // route level code-splitting 
+    // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
   },
   {
     path: '/logout',
-    beforeEnter() { // Avant d'entré dans /logout, on lance la fonction logout 
+    beforeEnter () { // Avant d'entré dans /logout, on lance la fonction logout
       store.logout()
     }
-  }  
+  },
+  {
+    path: '/choose-cat',
+    name: 'ChooseCat',
+    component: Login
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+  }
 ]
-
-
 
 const router = new VueRouter({
   mode: 'history',

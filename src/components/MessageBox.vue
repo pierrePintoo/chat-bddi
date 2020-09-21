@@ -1,12 +1,14 @@
 <template>
-        <form @submit.prevent="onSubmit" class="message-box__form">
-            <input ref="input" class="message-box__input" v-model="message" type="text" placeholder="Tapotttttte sur ton clavier ici..."> 
-            <!-- <Emoji @click="selectedEmoji"/> -->
-            <button class="message-box__btn">Send</button>
-        </form>
+      <form @submit.prevent="onSubmit" class="message-box__form">
+          <!-- <p v-if="this.store.typing" class="when-is-typing">{{ this.store.whoIsTyping.username }} is typing...</p> -->
+          <input ref="input" class="message-box__input" @keyup="isTyping" v-model="message" type="text" placeholder="Tapotttttte chur ton clavier ichi...">
+          <!-- <Emoji @click="selectedEmoji"/> -->
+          <button class="message-box__btn"><img src="../assets/patte.svg"></button>
+      </form>
 </template>
 
 <script>
+import store from '../store'
 require('vue-chat-emoji/dist/vue-chat-emoji.css')
 
 export default {
@@ -18,39 +20,51 @@ export default {
   },
   methods: {
     isLastIndexOF (arrayLength, el) {
-      if(arrayLength - 1 == this.textArray.indexOf(el)) {
+      if (arrayLength - 1 === this.textArray.indexOf(el)) {
         return true
       } else {
         return false
       }
     },
+    isTyping () {
+      this.$emit('typing', {
+        user: store.user,
+        typing: true
+      })
+    },
+    isNotTyping () {
+      this.$emit('typing', {
+        user: store.user,
+        typing: false
+      })
+    },
     tranform () {
       this.textArray = this.message.split('')
-      let lengthTextArray = this.textArray.length;
+      const lengthTextArray = this.textArray.length
       for (let i = 0; i < this.textArray.length; i++) {
         console.log(this.textArray[i] + ' : ' + this.isLastIndexOF(lengthTextArray, this.textArray[i]))
-        if(this.isLastIndexOF(lengthTextArray, this.textArray[i]) == false) {
-          switch(this.textArray[i]) {
+        if (this.isLastIndexOF(lengthTextArray, this.textArray[i]) === false) {
+          switch (this.textArray[i]) {
             case 's':
             case 'j':
             case 'ss':
             case 'ç':
               this.textArray[i] = 'ch'
-              break;
+              break
             case 'm':
               this.textArray[i] = 'mi'
-              break;
+              break
             case 'S':
             case 'J':
             case 'SS':
               this.textArray[i] = 'Ch'
-              break;
+              break
             case 'r':
-              this.textArray[i] = 'rrrr'          
-              break;
+              this.textArray[i] = 'rrrr'
+              break
             case 'R':
               this.textArray[i] = 'RRRR'
-              break;  
+              break
           }
         }
       }
@@ -77,7 +91,7 @@ export default {
 }
 
 .message-box__input{
-    width: 70%;
+    width: 100%;
     height: 50%;
     align-self: center;
     font-size: 15PX;
@@ -96,13 +110,22 @@ export default {
 }
 
 .message-box__btn{
-    width: 20%;
-    height: 50%;
+    width: 15%;
+    height: 60%;
     border: none;
-    background-color: black;
+    background-color: #181818;
     color: white;
     border-radius: 30px;
-    margin-right: 6.6%;
+    transition: transform 0.2s ease-in-out;
+}
+
+.message-box__btn:hover{
+  transform: scale(1.5);
+  cursor: pointer;
+}
+
+.when-is-typing{
+  position: absolute;
 }
 
 </style>
